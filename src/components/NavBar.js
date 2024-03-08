@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import * as styled from './NavBar.styles';
+import React from "react";
+import { Link } from "react-router-dom";
+import * as styled from "./NavBar.styles";
 
 const NavBar = () => {
   return (
@@ -14,8 +14,8 @@ const NavBar = () => {
 
         {/* 네비게이션 메뉴 */}
         <styled.NavLinks>
-          <styled.NavLink to="/">쇼핑몰</styled.NavLink>
-          <styled.NavLink to="/">소개</styled.NavLink>
+          <styled.NavLink to="/shop">쇼핑몰</styled.NavLink>
+          <styled.NavLink to="/about">소개</styled.NavLink>
         </styled.NavLinks>
       </styled.LeftSection>
 
@@ -24,7 +24,7 @@ const NavBar = () => {
         {/* 로그인 및 카트 */}
         <styled.NavLinks>
           <styled.UserIcon />
-          <Link to="/">로그인</Link>
+          <Link to="/login">로그인</Link>
           <styled.CartButton>카트</styled.CartButton>
         </styled.NavLinks>
       </styled.RightSection>
