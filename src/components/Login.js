@@ -24,7 +24,7 @@ const Login = () => {
       alert(response.data.message);
 
       // 메인페이지로 이동
-      navigate("/main");
+      navigate("/");
     } catch (error) {
       // Handle login error
       if (error.response && error.response.status === 401) {
