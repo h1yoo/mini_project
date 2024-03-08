@@ -11,7 +11,7 @@ app.use(express.json());
 
 const usersFilePath = path.join(__dirname, "server", "users.json");
 
-// Function to read user data from the file
+// JSON파일에서 유저 데이터를 읽기위한 함수
 const readUserData = async () => {
   try {
     const data = await fs.readFile(usersFilePath);
@@ -23,6 +23,7 @@ const readUserData = async () => {
 };
 
 // Function to write user data to the file
+// 유저 데이터를 JSON파일에 쓰기위한 함수
 const writeUserData = async (userData) => {
   await fs.writeFile(usersFilePath, JSON.stringify(userData, null, 2));
 };
@@ -69,9 +70,11 @@ app.post("/api/login", async (req, res) => {
 
     // Check if the user exists and the password matches
     if (user && user.password === password) {
-      res.status(200).json({ message: "Login successful!" });
+      res.status(200).json({ message: "로그인 성공" });
     } else {
-      res.status(401).json({ error: "Invalid email or password" });
+      res
+        .status(401)
+        .json({ error: "비밀번호 혹은 이메일이 일치하지 않습니다." });
     }
   } catch (error) {
     console.error(error);

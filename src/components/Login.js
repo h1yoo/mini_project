@@ -8,7 +8,16 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  // 로그인 성공시 데이터를 local storage에 저장
+  const handleLoginSuccess = () => {
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userEmail", userEmail);
+    // 메인페이지로 이동
+    navigate("/");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +31,8 @@ const Login = () => {
 
       // handlesubmit 성공시
       alert(response.data.message);
-
-      // 메인페이지로 이동
-      navigate("/");
+      setIsLoggedIn(true);
+      handleLoginSuccess();
     } catch (error) {
       // Handle login error
       if (error.response && error.response.status === 401) {
@@ -35,6 +43,11 @@ const Login = () => {
       console.error(error);
     }
   };
+  //로그인한 유저이면 메인페이지로 이동
+  if (isLoggedIn) {
+    navigate("/");
+  }
+
   return (
     <div className="c-wrapper">
       <form onSubmit={handleSubmit}>

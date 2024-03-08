@@ -1,8 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as styled from "./NavBar.styles";
 
 const NavBar = () => {
+  const loginData = localStorage.getItem("isLoggedIn");
+  console.log(loginData);
+
+  const LogOut = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    const navigate = useNavigate();
+    navigate("/");
+  };
   return (
     <styled.Container>
       {/* 좌측 영역 */}
@@ -24,7 +33,14 @@ const NavBar = () => {
         {/* 로그인 및 카트 */}
         <styled.NavLinks>
           <styled.UserIcon />
-          <Link to="/login">로그인</Link>
+          {loginData ? (
+            <Link to="/" onClick={LogOut}>
+              로그아웃
+            </Link>
+          ) : (
+            <Link to="/login">로그인</Link>
+          )}
+          {/* <Link to="/login">로그인</Link> */}
           <styled.CartButton>카트</styled.CartButton>
         </styled.NavLinks>
       </styled.RightSection>
