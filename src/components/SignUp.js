@@ -37,7 +37,7 @@ const SignUp = () => {
         );
 
         // 회원가입 성공시
-        alert(response.data.message);
+        alert("회원가입이 완료되었습니다");
         // 회원가입 성공시 로그인페이지로 이동
         navigate("/login");
       } catch (error) {

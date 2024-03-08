@@ -30,7 +30,7 @@ const Login = () => {
       });
 
       // handlesubmit 성공시
-      alert(response.data.message);
+      alert("로그인이 되었습니다.");
       setIsLoggedIn(true);
       handleLoginSuccess();
     } catch (error) {

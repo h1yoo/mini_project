@@ -9,6 +9,7 @@ const NavBar = () => {
   const LogOut = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userEmail");
+    alert("로그아웃 되었습니다.");
     const navigate = useNavigate();
     navigate("/");
   };
