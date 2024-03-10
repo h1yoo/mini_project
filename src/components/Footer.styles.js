@@ -9,6 +9,8 @@ export const FooterContainer = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  width: 100%;
+  margin-top: 50px;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -25,7 +27,7 @@ export const LeftSection = styled.div`
 
 export const NewsletterTitle = styled.h2`
   flex-direction: column;
-  margin-bottom: -7px;
+  margin-bottom: 3px;
 `;
 
 export const NewsletterSubtitle = styled.p`

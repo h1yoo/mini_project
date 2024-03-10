@@ -3,6 +3,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
+  color: #334748;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,8 +11,9 @@ export const Container = styled.div`
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
-  width: 100%;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 1000;
 `;
 
@@ -26,7 +28,7 @@ export const Logo = styled.div`
   font-weight: bold;
   margin-right: 0.5rem;
   a {
-    color: #343a40;
+    color: #334748;
     text-decoration: none;
   }
 `;
@@ -58,6 +60,8 @@ export const RightSection = styled.div`
   display: flex;
   align-items: center;
   margin-right: 60px;
+  position: fixed;
+  right: 0;
 `;
 
 export const CartButton = styled.button`

@@ -1,28 +1,37 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import * as styled from "./NavBar.styles";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import * as styled from './NavBar.styles';
+import CartModal from './CartModal';
 
 const NavBar = () => {
-  const loginData = localStorage.getItem("isLoggedIn");
-  console.log(loginData);
+  const loginData = localStorage.getItem('isLoggedIn');
+  const [showCartModal, setShowCartModal] = useState(false);
+  const [cartProducts, setCartProducts] = useState([]);
 
   const LogOut = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userEmail");
-    alert("로그아웃 되었습니다.");
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
+    alert('로그아웃 되었습니다.');
     const navigate = useNavigate();
-    navigate("/");
+    navigate('/');
   };
+
+  const openCartModal = () => {
+    setShowCartModal(true);
+  };
+
+  const closeCartModal = () => {
+    setShowCartModal(false);
+  };
+
   return (
     <styled.Container>
       {/* 좌측 영역 */}
       <styled.LeftSection>
-        {/* 로고 */}
         <styled.Logo>
           <Link to="/">Coffee Club</Link>
         </styled.Logo>
 
-        {/* 네비게이션 메뉴 */}
         <styled.NavLinks>
           <styled.NavLink to="/shop">쇼핑몰</styled.NavLink>
           <styled.NavLink to="/about">소개</styled.NavLink>
@@ -31,7 +40,6 @@ const NavBar = () => {
 
       {/* 우측 영역 */}
       <styled.RightSection>
-        {/* 로그인 및 카트 */}
         <styled.NavLinks>
           <styled.UserIcon />
           {loginData ? (
@@ -41,10 +49,14 @@ const NavBar = () => {
           ) : (
             <Link to="/login">로그인</Link>
           )}
-          {/* <Link to="/login">로그인</Link> */}
-          <styled.CartButton>카트</styled.CartButton>
+
+          {/* 카트 버튼 */}
+          <styled.CartButton onClick={openCartModal}>카트 {cartProducts.length > 0 ? `(${cartProducts.reduce((acc, cur) => acc + cur.quantity, 0)})` : '(0)'}</styled.CartButton>
         </styled.NavLinks>
       </styled.RightSection>
+
+      {/* 카트 모달 */}
+      {showCartModal && <CartModal products={cartProducts} onClose={closeCartModal} />}
     </styled.Container>
   );
 };
