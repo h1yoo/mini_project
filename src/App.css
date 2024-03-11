@@ -3,17 +3,21 @@
 /* 유혜원 CSS 쇼핑몰 */
 a {
   text-decoration: none;
-  color: black;
+  color: #334748;
+}
+* {
+  color: #334748;
 }
 .w_laytout {
   width: 99vw;
   box-sizing: border-box;
+
   margin: 0 auto;
 }
 .w_container {
   box-sizing: border-box;
   margin: 140px auto;
-  width: 1300px;
+  width: 90vw;
 }
 .w_title {
   font-size: 3.5rem;
@@ -37,8 +41,7 @@ a {
   width: 100%;
 }
 .w_thumbnail {
-  width: 300px;
-  height: 500px;
+  width: 22%;
   margin: 0;
   padding: 0;
   display: flex;
@@ -46,7 +49,6 @@ a {
 }
 .w_thumbImg {
   width: 100%;
-  height: 400px;
   margin: 0;
 }
 .w_thumbName {
@@ -56,7 +58,8 @@ a {
 }
 .w_thumbPrice {
   font-size: 18px;
-  margin: 5px 0 0 0;
+  font-weight: medium;
+  margin: 5px 0 50px 0;
 }
 /* 유혜원 CSS 소개 */
 .w_coffeeContainer {
