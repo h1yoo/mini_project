@@ -1,23 +1,23 @@
 
 /* ********************************* */
 /* 유혜원 CSS 쇼핑몰 */
-a {
+.w_laytout a {
   text-decoration: none;
-  color: #334748;
-}
-* {
   color: #334748;
 }
 .w_laytout {
   width: 99vw;
   box-sizing: border-box;
-
+  
   margin: 0 auto;
 }
 .w_container {
   box-sizing: border-box;
   margin: 140px auto;
   width: 90vw;
+}
+.w_container * {
+  color: #334748;
 }
 .w_title {
   font-size: 3.5rem;

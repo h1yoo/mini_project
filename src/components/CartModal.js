@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as styled from "./CartModal.styles";
+import "./CartModalStyles.css";
 
-const CartModal = ({ onClose }) => {
+const CartModal = ({ onClose, products }) => {
   const [parsedItem, setParsedItem] = useState([]);
 
   // 첫 렌더링시 로컬 스토리지에서 데이터 읽어오기.
@@ -16,6 +17,12 @@ const CartModal = ({ onClose }) => {
     ? parsedItem.reduce((acc, cur) => {
         const itemPrice = parseFloat(cur.price.replace(/[^\d.-]/g, "")); // ₩ 기호와 , 를 빼고 숫자만 남기기.
         const itemTotal = itemPrice * cur.quantity;
+        
+        // (유혜원) 이미지 추가하기 위한 코드 작성
+        // products 배열에서 현재 제품과 일치하는 객체 찾기
+        const matchingProduct = products.find((product) => product.id === cur.id);
+        // 이미지가 있는 경우에만 이미지 URL 사용
+        const itemImage = matchingProduct ? matchingProduct.image : "";
 
         // 각각의 아이템 디버깅
         console.log(
@@ -26,7 +33,11 @@ const CartModal = ({ onClose }) => {
           "Quantity:",
           cur.quantity,
           "Total:",
-          itemTotal
+          itemTotal,
+          "Image:",
+          itemImage,
+          "parsedItem: ",
+          parsedItem
         );
 
         return acc + itemTotal;
@@ -57,10 +68,13 @@ const CartModal = ({ onClose }) => {
             ) : (
               // 카트에 상품이 있는 경우
               parsedItem.map((product) => (
-                <div key={product.id}>
-                  <p>{product.name}</p>
-                  <p>{product.quantity}</p>
-                  <p>{product.price}</p>
+                <div key={product.id} className="w_cartModalCont">
+                  <img src={product.image} alt={product.name}/>
+                  <div>
+                    <p>{product.name}</p>
+                    <p>{product.price}</p>
+                    <p>수량: {product.quantity}</p>
+                  </div>
                 </div>
               ))
             )}

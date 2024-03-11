@@ -21,7 +21,7 @@ const products = [
   },
   {
     id: 1,
-    name: "켈리포니아",
+    name: "캘리포니아",
     price: "￦ 15,000",
     image:
       "https://static.wixstatic.com/media/ea26fd_111928228dd04e19b0edf49e04c1ef67~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_111928228dd04e19b0edf49e04c1ef67~mv2.jpg",

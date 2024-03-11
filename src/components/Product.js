@@ -63,6 +63,7 @@ const Product = ({ products }) => {
       name: productToAdd.name,
       price: productToAdd.price,
       quantity: prodCount,
+      image: productToAdd.image,  // 쇼핑 카트에 이미지 추가
     };
 
     //=========== 중복된 아이템 체크 ==================//

@@ -1,0 +1,28 @@
+.w_cartModalCont {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  padding: 20px 30px 10px 30px;
+}
+.w_cartModalCont > img {
+  width: 15%;
+  margin-right: 20px;
+}
+.w_cartModalCont p {
+  font-size: 18px;
+  line-height: 25px;
+  margin-top: 4px;
+}
+.w_cartModalCont p:nth-child(2) {
+  font-weight: bold;
+}
+.w_cartModalCont p:nth-child(3) {
+  font-size: 15px;
+  margin-top: 2px;
+}
+.w_cartModalCont input {
+  width: 50px;
+  height: 30px;
+  padding: 0 0 0 10px;
+  margin-top: 5px;
+}
