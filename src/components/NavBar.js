@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import * as styled from './NavBar.styles';
-import CartModal from './CartModal';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as styled from "./NavBar.styles";
+import CartModal from "./CartModal";
 
 const NavBar = () => {
-  const loginData = localStorage.getItem('isLoggedIn');
+  const loginData = localStorage.getItem("isLoggedIn");
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
 
   const LogOut = () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userEmail');
-    alert('로그아웃 되었습니다.');
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    alert("로그아웃 되었습니다.");
     const navigate = useNavigate();
-    navigate('/');
+    navigate("/");
   };
 
   const openCartModal = () => {
@@ -51,12 +51,19 @@ const NavBar = () => {
           )}
 
           {/* 카트 버튼 */}
-          <styled.CartButton onClick={openCartModal}>카트 {cartProducts.length > 0 ? `(${cartProducts.reduce((acc, cur) => acc + cur.quantity, 0)})` : '(0)'}</styled.CartButton>
+          <styled.CartButton onClick={openCartModal}>
+            카트{" "}
+            {cartProducts.length > 0
+              ? `(${cartProducts.reduce((acc, cur) => acc + cur.quantity, 0)})`
+              : "(0)"}
+          </styled.CartButton>
         </styled.NavLinks>
       </styled.RightSection>
 
       {/* 카트 모달 */}
-      {showCartModal && <CartModal products={cartProducts} onClose={closeCartModal} />}
+      {showCartModal && (
+        <CartModal products={cartProducts} onClose={closeCartModal} />
+      )}
     </styled.Container>
   );
 };
