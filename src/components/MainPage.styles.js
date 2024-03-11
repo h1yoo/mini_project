@@ -145,4 +145,88 @@ export const SubscriptionImage = styled.img`
   display: block;
 `;
 
+export const IntroSection = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 130px;
+  }
+`;
+
+export const IntroImage = styled.img`
+  width: 25%;
+  margin-right: 60px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+`;
+
+export const IntroContent = styled.div`
+  margin-left: 20px;
+`;
+export const IntroText = styled.div`
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 7px;
+  @media (min-width: 2880px) {
+    font-size: 5rem;
+  }
+`;
+
+export const IntroSubtitle = styled.p`
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #334748;
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+  @media (min-width: 2880px) {
+    font-size: 2.3rem;
+  }
+`;
+
+export const IntroDescription = styled.p`
+  width: 350px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+  @media (min-width: 2880px) {
+    font-size: 1.6rem;
+    width: 630px;
+  }
+`;
+
+export const IntroButton = styled.button`
+  color: #334748;
+  font-weight: bold;
+  padding: 10px 35px;
+  background-color: #fff;
+  border: 1px solid #334748;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+    background-color: #334748;
+  }
+
+  @media (min-width: 2880px) {
+    font-size: 1.5rem;
+  }
+`;
+
 export default styled;

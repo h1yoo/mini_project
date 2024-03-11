@@ -74,6 +74,21 @@ const MainPage = () => {
         </styled.SubscriptionBox>
       </styled.MainPageContainer>
 
+      <styled.IntroSection>
+        <styled.IntroImage src="/assets/MainPage/IntroImg.png" alt="Intro image" />
+
+        <styled.IntroContent>
+          <styled.IntroText>커피클럽 소개</styled.IntroText>
+          <styled.IntroSubtitle>당신 만을 위한 신선한 스페셜티 커피</styled.IntroSubtitle>
+          <styled.IntroDescription>
+            우리의 특제 블렌드는 단순한 커피를 넘어 풍부한 맛의 세계를 제공합니다. 우리의 특별한 블렌딩으로 새로운 커피 경험을 만나보세요.
+            <br /> "커피를 더 나은 방식으로 즐기는 곳, 커피클럽."
+          </styled.IntroDescription>
+          <Link to="/another-page">
+            <styled.IntroButton>더보기</styled.IntroButton>
+          </Link>
+        </styled.IntroContent>
+      </styled.IntroSection>
       <Footer />
     </div>
   );
