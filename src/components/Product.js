@@ -47,6 +47,7 @@ const Product = ({ products }) => {
     setProdCount(count);
   };
 
+  //============= 장바구니 추가 기능 ========================//
   const addToCart = () => {
     const productToAdd = products.find((product) => {
       return product.id === parseInt(productId, 10); //카트 수정부분
@@ -63,8 +64,39 @@ const Product = ({ products }) => {
       price: productToAdd.price,
       quantity: prodCount,
     };
-    // console.log(newItem);
 
+    //=========== 중복된 아이템 체크 ==================//
+    const existingItemIndex = cartInLocalStorage.findIndex(
+      (item) => item.id === newItem.id
+    );
+
+    // console.log("존재하나?", existingItemIndex); // 중복아이템이 없으면 -1 반환
+
+    if (existingItemIndex !== -1) {
+      // 중복 항목이 있으면 -1를 출력하지 않는다.
+      const userConfirmed = window.confirm(
+        "중복된 아이템이 있습니다. 장바구니를 업데이트 하시겠습니다??"
+      ); // true or false 반환
+
+      if (userConfirmed) {
+        // 유저가 Ok를 선택할시 같은 인덱스 아이템 찾은뒤 quantity만 새로운 값으로 저장한다.
+        const updatedCart = cartInLocalStorage.map((item, index) =>
+          index === existingItemIndex ? { ...item, quantity: prodCount } : item
+        );
+
+        // 업데이트된 카트를 저장
+        setCartInLocalStorage(updatedCart);
+        // 상태 업데이트
+        setCart(updatedCart);
+
+        console.log("Quantity updated");
+        // 사용자가 확인을 거부한 경우 함수 종료
+        return;
+      }
+    }
+
+    // 중복된 아이템이 없으면 새로운 아이템 추가
+    // 현재 로컬 스토리지의 카트에 새로운 아이템 추가
     setCartInLocalStorage((prevCart) => [...prevCart, newItem]);
     setCart((prevCart) => [...prevCart, newItem]);
   };
