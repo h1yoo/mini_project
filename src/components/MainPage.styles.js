@@ -7,10 +7,12 @@ export const PageWrapper = styled.div`
 `;
 
 export const MainPageContainer = styled.div`
-  margin-top: 60px;
   width: 100%;
+  margin-top: 60px;
   max-width: 2880px;
   color: #334748;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const MainPageTitle = styled.h1`
@@ -66,12 +68,14 @@ export const SubscriptionContent = styled.div`
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 2;
+  max-width: 100%;
 `;
 
 export const SubscriptionTextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 850px;
+  width: 100%;
+  max-width: 850px;
   margin-bottom: 20px;
 `;
 
