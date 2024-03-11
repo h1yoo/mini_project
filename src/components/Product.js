@@ -92,6 +92,9 @@ const Product = ({ products }) => {
         console.log("Quantity updated");
         // 사용자가 확인을 거부한 경우 함수 종료
         return;
+      } else {
+        // Cancel버튼을 선택한경우.
+        return;
       }
     }
 
