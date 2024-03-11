@@ -21,7 +21,7 @@ const products = [
   },
   {
     id: 1,
-    name: "캘리포니아",
+    name: "켈리포니아",
     price: "￦ 15,000",
     image:
       "https://static.wixstatic.com/media/ea26fd_111928228dd04e19b0edf49e04c1ef67~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_111928228dd04e19b0edf49e04c1ef67~mv2.jpg",
@@ -46,24 +46,42 @@ const products = [
     hoveredImage:
       "https://static.wixstatic.com/media/ea26fd_ace0cdf50c494b0091210b2914f8b2dd~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_ace0cdf50c494b0091210b2914f8b2dd~mv2.jpg",
   },
-  { id: 4, name: "블렌드01", price: "￦ 15,000",
+  {
+    id: 4,
+    name: "블렌드01",
+    price: "￦ 15,000",
     image:
       "https://static.wixstatic.com/media/ea26fd_5ba7c6075ceb4a1383905ea99934bb73~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_5ba7c6075ceb4a1383905ea99934bb73~mv2.jpg",
     hoveredImage:
-      "https://static.wixstatic.com/media/ea26fd_2f18e619b97c4915815c364d19f282f4~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_2f18e619b97c4915815c364d19f282f4~mv2.jpg"
+      "https://static.wixstatic.com/media/ea26fd_55dc019971b64f878f746a777ded13a1~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_55dc019971b64f878f746a777ded13a1~mv2.jpg",
   },
-  { id: 5, name: "블렌드02", price: "￦ 15,000",
-    image: "https://static.wixstatic.com/media/ea26fd_55dc019971b64f878f746a777ded13a1~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_55dc019971b64f878f746a777ded13a1~mv2.jpg",
-    hoveredImage: "https://static.wixstatic.com/media/ea26fd_ba8c4d815df7470d8c3cd6949b3cb095~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_ba8c4d815df7470d8c3cd6949b3cb095~mv2.jpg"
+  {
+    id: 5,
+    name: "블렌드02",
+    price: "￦ 15,000",
+    image:
+      "https://static.wixstatic.com/media/ea26fd_55dc019971b64f878f746a777ded13a1~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_55dc019971b64f878f746a777ded13a1~mv2.jpg",
+    hoveredImage:
+      "https://static.wixstatic.com/media/ea26fd_5ba7c6075ceb4a1383905ea99934bb73~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_5ba7c6075ceb4a1383905ea99934bb73~mv2.jpg",
   },
-  { id: 6, name: "블렌드03", price: "￦ 15,000",
-    image: "https://static.wixstatic.com/media/ea26fd_24e11e731a9740328dd8bc7db667bae2~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_24e11e731a9740328dd8bc7db667bae2~mv2.jpg",
-    hoveredImage: "https://static.wixstatic.com/media/ea26fd_4ef7df10de6942eab7730b97cc0bd42d~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_4ef7df10de6942eab7730b97cc0bd42d~mv2.jpg"
+  {
+    id: 6,
+    name: "블렌드03",
+    price: "￦ 15,000",
+    image:
+      "https://static.wixstatic.com/media/ea26fd_24e11e731a9740328dd8bc7db667bae2~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_24e11e731a9740328dd8bc7db667bae2~mv2.jpg",
+    hoveredImage:
+      "https://static.wixstatic.com/media/ea26fd_49f59ee2e23e4e97ba5403f72ded6084~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_49f59ee2e23e4e97ba5403f72ded6084~mv2.jpg",
   },
-  { id: 7, name: "블렌드04", price: "￦ 15,000",
-    image: "https://static.wixstatic.com/media/ea26fd_49f59ee2e23e4e97ba5403f72ded6084~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_49f59ee2e23e4e97ba5403f72ded6084~mv2.jpg",
-    hoveredImage: "https://static.wixstatic.com/media/ea26fd_093f3b614ea84bcebbe20d9cb5c52bb4~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_093f3b614ea84bcebbe20d9cb5c52bb4~mv2.jpg"
-  }
+  {
+    id: 7,
+    name: "블렌드04",
+    price: "￦ 15,000",
+    image:
+      "https://static.wixstatic.com/media/ea26fd_49f59ee2e23e4e97ba5403f72ded6084~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_49f59ee2e23e4e97ba5403f72ded6084~mv2.jpg",
+    hoveredImage:
+      "https://static.wixstatic.com/media/ea26fd_24e11e731a9740328dd8bc7db667bae2~mv2.jpg/v1/fill/w_625,h_834,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ea26fd_24e11e731a9740328dd8bc7db667bae2~mv2.jpg",
+  },
 ];
 
 function App() {
