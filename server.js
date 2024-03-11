@@ -57,7 +57,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-// Login endpoint
+// 로그인 Endpoint
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;

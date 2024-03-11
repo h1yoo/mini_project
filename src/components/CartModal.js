@@ -16,6 +16,7 @@ const CartModal = ({ onClose }) => {
     ? parsedItem.reduce((acc, cur) => {
         const itemPrice = parseFloat(cur.price.replace(/[^\d.-]/g, "")); // ₩ 기호와 , 를 빼고 숫자만 남기기.
         const itemTotal = itemPrice * cur.quantity;
+
         // 각각의 아이템 디버깅
         console.log(
           "Item:",
