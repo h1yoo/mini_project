@@ -28,26 +28,26 @@ const writeUserData = async (userData) => {
   await fs.writeFile(usersFilePath, JSON.stringify(userData, null, 2));
 };
 
-// Registration endpoint
+// 회원가입 endpoint
 app.post("/api/register", async (req, res) => {
   try {
     const { email, password, number, address } = req.body;
 
-    // Read existing user data from the file
+    // 기존 유저 데이터 읽어오기
     const users = await readUserData();
 
-    // Check if the user with the same email already exists
+    // 이메일 중복체크
     if (users.some((user) => user.email === email)) {
       return res
         .status(400)
         .json({ error: "이미 존재하는 이메일 주소입니다." });
     }
 
-    // Add new user data
+    // 새로운 유저 데이터 추가
     const newUser = { email, password, number, address };
     users.push(newUser);
 
-    // Write the updated user data back to the file
+    // 새로운 유저 데이터 파일에 쓰기
     await writeUserData(users);
 
     res.status(201).json({ message: "회원가입 성공하였습니다." });
@@ -62,13 +62,13 @@ app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Read existing user data from the file
+    // 유저 데이터 읽어오기
     const users = await readUserData();
 
-    // Find the user by email
+    // 이메일로 유저 찾기
     const user = users.find((user) => user.email === email);
 
-    // Check if the user exists and the password matches
+    // 유저의 이메일과 비밀번호가 일치하는지 체크
     if (user && user.password === password) {
       res.status(200).json({ message: "로그인 성공" });
     } else {
