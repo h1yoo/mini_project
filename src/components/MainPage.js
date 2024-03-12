@@ -2,12 +2,20 @@ import React from 'react';
 import NavBar from './NavBar';
 import * as styled from './MainPage.styles';
 import Footer from './Footer';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaTruck } from 'react-icons/fa';
 import { BiSolidCoffeeBean } from 'react-icons/bi';
 import { IoCalendarNumberSharp } from 'react-icons/io5';
 
 const MainPage = () => {
+  //페이지 이동시 페이지 스크롤
+  const navigate = useNavigate();
+
+  const scrollToTop = (path) => {
+    navigate(path);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div>
       <NavBar />
@@ -65,9 +73,7 @@ const MainPage = () => {
             </styled.SubscriptionTextWrapper>
 
             {/* 구독 버튼 */}
-            <Link to="/shop">
-              <styled.SubscriptionButton>구독하기</styled.SubscriptionButton>
-            </Link>
+            <styled.SubscriptionButton onClick={() => scrollToTop('/shop')}>구독하기</styled.SubscriptionButton>
           </styled.SubscriptionContent>
 
           <styled.SubscriptionImage src="/assets/MainPage/coffeeBeans.gif" alt="coffee bean gif" />
@@ -84,9 +90,7 @@ const MainPage = () => {
             우리의 특제 블렌드는 단순한 커피를 넘어 풍부한 맛의 세계를 제공합니다. 우리의 특별한 블렌딩으로 새로운 커피 경험을 만나보세요.
             <br /> "커피를 더 나은 방식으로 즐기는 곳, 커피클럽."
           </styled.IntroDescription>
-          <Link to="/shop">
-            <styled.IntroButton>더보기</styled.IntroButton>
-          </Link>
+          <styled.IntroButton onClick={() => scrollToTop('/about')}>더보기</styled.IntroButton>
         </styled.IntroContent>
       </styled.IntroSection>
       <Footer />
