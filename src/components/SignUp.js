@@ -3,6 +3,7 @@ import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaMobileAlt, FaHome } from "react-icons/fa";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 const SignUp = () => {
   //============== state ==============//
@@ -53,69 +54,72 @@ const SignUp = () => {
   };
 
   return (
-    <div className="c-wrapper">
-      <form onSubmit={handleSubmit}>
-        <h1>회원가입</h1>
-        <div className="c-input-box">
-          <input
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            type="email"
-            placeholder="아이디 입력"
-            required
-          />
-          <FaUser className="c-icon" />
-        </div>
-        <div className="c-input-box">
-          <input
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-            type="password"
-            placeholder="비밀번호"
-            required
-          />
-          <FaLock className="c-icon" />
-        </div>
+    <>
+      <NavBar />
+      <div className="c-wrapper">
+        <form onSubmit={handleSubmit}>
+          <h1>회원가입</h1>
+          <div className="c-input-box">
+            <input
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
+              type="email"
+              placeholder="아이디 입력"
+              required
+            />
+            <FaUser className="c-icon" />
+          </div>
+          <div className="c-input-box">
+            <input
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
+              type="password"
+              placeholder="비밀번호"
+              required
+            />
+            <FaLock className="c-icon" />
+          </div>
 
-        <div className="c-input-box">
-          <input
-            value={checkPassword}
-            onChange={(e) => setCheckPassword(e.target.value)}
-            type="password"
-            placeholder="비밀번호 재입력"
-            required
-          />
-          <FaLock className="c-icon" />
-        </div>
-        <div className="c-input-box">
-          <input
-            value={userNumber}
-            onChange={(e) => setUserNumber(e.target.value)}
-            type="text"
-            placeholder="전화번호"
-            required
-          />
-          <FaMobileAlt className="c-icon" />
-        </div>
-        <div className="c-input-box">
-          <input
-            value={userAddress}
-            onChange={(e) => setUserAddress(e.target.value)}
-            type="text"
-            placeholder="주소"
-            required
-          />
-          <FaHome className="c-icon" />
-        </div>
+          <div className="c-input-box">
+            <input
+              value={checkPassword}
+              onChange={(e) => setCheckPassword(e.target.value)}
+              type="password"
+              placeholder="비밀번호 재입력"
+              required
+            />
+            <FaLock className="c-icon" />
+          </div>
+          <div className="c-input-box">
+            <input
+              value={userNumber}
+              onChange={(e) => setUserNumber(e.target.value)}
+              type="text"
+              placeholder="전화번호"
+              required
+            />
+            <FaMobileAlt className="c-icon" />
+          </div>
+          <div className="c-input-box">
+            <input
+              value={userAddress}
+              onChange={(e) => setUserAddress(e.target.value)}
+              type="text"
+              placeholder="주소"
+              required
+            />
+            <FaHome className="c-icon" />
+          </div>
 
-        <button type="submit">회원가입</button>
-        <div className="c-register-link">
-          <p>
-            아이디가 있나요? <Link to="/login">로그인</Link>
-          </p>
-        </div>
-      </form>
-    </div>
+          <button type="submit">회원가입</button>
+          <div className="c-register-link">
+            <p>
+              아이디가 있나요? <Link to="/login">로그인</Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

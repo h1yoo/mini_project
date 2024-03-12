@@ -11,8 +11,15 @@ const Product = ({ products }) => {
   const [selectedImage, setSelectedImage] = useState(null); // 선택된 썸네일 이미지
   const [prodCount, setProdCount] = useState(1); // 제품 수량 (input)
   const [cart, setCart] = useState([]); // 카트에 추가 ===> 아직 미완성 !!!!!!!!!!!
-  const [cartInLocalStorage, setCartInLocalStorage] = useState([]); // 로컬스토리지에 저장된 카트
   const [isPurModalOpen, setIsPurModalOpen] = useState(false); // 구매버튼 클릭 시 모달창 열림 여부
+  const [isClicked, setIsClicked] = useState(false);
+  // 쇼핑몰을 통해 상품 클릭시 기존 로컬 스토리지 초기화 방지를 위한 코드  ======= //
+  const [cartInLocalStorage, setCartInLocalStorage] = useState(() => {
+    // 로컬스토리지에서 데이터 가져오기
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    // 로컬 스토리지에 데이터가 없을때만 초기화
+    return storedCart.length > 0 ? storedCart : [];
+  });
 
   //============== useParams를 이용해 products에 등록된 Id를 가져오기 ==============//
   //============== (상단 ul - li 부분에 적용 + 썸네일 이미지 가져올 때 필요) ==============//
@@ -63,7 +70,7 @@ const Product = ({ products }) => {
       name: productToAdd.name,
       price: productToAdd.price,
       quantity: prodCount,
-      image: productToAdd.image,  // 쇼핑 카트에 이미지 추가
+      image: productToAdd.image, // 쇼핑 카트에 이미지 추가
     };
 
     //=========== 중복된 아이템 체크 ==================//

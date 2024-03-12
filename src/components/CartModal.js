@@ -17,10 +17,12 @@ const CartModal = ({ onClose, products }) => {
     ? parsedItem.reduce((acc, cur) => {
         const itemPrice = parseFloat(cur.price.replace(/[^\d.-]/g, "")); // ₩ 기호와 , 를 빼고 숫자만 남기기.
         const itemTotal = itemPrice * cur.quantity;
-        
+
         // (유혜원) 이미지 추가하기 위한 코드 작성
         // products 배열에서 현재 제품과 일치하는 객체 찾기
-        const matchingProduct = products.find((product) => product.id === cur.id);
+        const matchingProduct = products.find(
+          (product) => product.id === cur.id
+        );
         // 이미지가 있는 경우에만 이미지 URL 사용
         const itemImage = matchingProduct ? matchingProduct.image : "";
 
@@ -69,7 +71,7 @@ const CartModal = ({ onClose, products }) => {
               // 카트에 상품이 있는 경우
               parsedItem.map((product) => (
                 <div key={product.id} className="w_cartModalCont">
-                  <img src={product.image} alt={product.name}/>
+                  <img src={product.image} alt={product.name} />
                   <div>
                     <p>{product.name}</p>
                     <p>{product.price}</p>

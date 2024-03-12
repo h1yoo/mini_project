@@ -3,6 +3,7 @@ import "./Login.css";
 import { FaUser, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -49,47 +50,50 @@ const Login = () => {
   }
 
   return (
-    <div className="c-wrapper">
-      <form onSubmit={handleSubmit}>
-        <h1>로그인</h1>
-        <div className="c-input-box">
-          <input
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            type="email"
-            placeholder="아이디 입력"
-            required
-          />
-          <FaUser className="c-icon" />
-        </div>
-        <div className="c-input-box">
-          <input
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-            type="password"
-            placeholder="비밀번호 입력"
-            required
-          />
-          <FaLock className="c-icon" />
-        </div>
-        <div className="c-remember">
-          <label>
+    <>
+      <NavBar />
+      <div className="c-wrapper">
+        <form onSubmit={handleSubmit}>
+          <h1>로그인</h1>
+          <div className="c-input-box">
             <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
+              type="email"
+              placeholder="아이디 입력"
+              required
             />
-            Remember me
-          </label>
-        </div>
-        <button type="submit">로그인</button>
-        <div className="c-register-link">
-          <p>
-            아이디가 없나요? <Link to="/signup">회원가입</Link>
-          </p>
-        </div>
-      </form>
-    </div>
+            <FaUser className="c-icon" />
+          </div>
+          <div className="c-input-box">
+            <input
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
+              type="password"
+              placeholder="비밀번호 입력"
+              required
+            />
+            <FaLock className="c-icon" />
+          </div>
+          <div className="c-remember">
+            <label>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+              />
+              Remember me
+            </label>
+          </div>
+          <button type="submit">로그인</button>
+          <div className="c-register-link">
+            <p>
+              아이디가 없나요? <Link to="/signup">회원가입</Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

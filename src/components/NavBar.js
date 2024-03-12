@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as styled from "./NavBar.styles";
 import CartModal from "./CartModal";
@@ -7,6 +7,21 @@ const NavBar = () => {
   const loginData = localStorage.getItem("isLoggedIn");
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
+
+  useEffect(() => {
+    const cartItem = localStorage.getItem("cart");
+    setCartProducts(cartItem ? JSON.parse(cartItem) : []);
+  }, []);
+
+  // 총 수량 구하는 함수
+  const getTotalQuantity = () => {
+    const totalProducts = cartProducts.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+
+    return totalProducts;
+  };
 
   const LogOut = () => {
     localStorage.removeItem("isLoggedIn");
@@ -52,10 +67,8 @@ const NavBar = () => {
 
           {/* 카트 버튼 */}
           <styled.CartButton onClick={openCartModal}>
-            카트{" "}
-            {cartProducts.length > 0
-              ? `(${cartProducts.reduce((acc, cur) => acc + cur.quantity, 0)})`
-              : "(0)"}
+            카트
+            {/* {cartProducts.length > 0 ? `(${getTotalQuantity()})` : "(0)"} */}
           </styled.CartButton>
         </styled.NavLinks>
       </styled.RightSection>
