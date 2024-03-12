@@ -115,7 +115,7 @@ export const SubscriptionTextIcon = styled.span`
 `;
 
 export const SubscriptionTextDescription = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #334748;
 `;
@@ -175,6 +175,7 @@ export const IntroContent = styled.div`
 export const IntroText = styled.div`
   font-size: 3rem;
   font-weight: bold;
+  color: #334748;
   margin-bottom: 7px;
   @media (min-width: 2880px) {
     font-size: 5rem;

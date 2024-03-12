@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { VscAdd, VscChromeMinimize } from "react-icons/vsc";
-import Modal from "react-modal";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { VscAdd, VscChromeMinimize } from 'react-icons/vsc';
+import Modal from 'react-modal';
+import NavBar from './NavBar';
+import Footer from './Footer';
+import CartModal from './CartModal';
 
 const Product = ({ products }) => {
   //============== state ==============//
   const [selectedImage, setSelectedImage] = useState(null); // 선택된 썸네일 이미지
   const [prodCount, setProdCount] = useState(1); // 제품 수량 (input)
-  const [cart, setCart] = useState([]); // 카트에 추가 ===> 아직 미완성 !!!!!!!!!!!
+  const [cart, setCart] = useState([]); // 카트에 추가
   const [isPurModalOpen, setIsPurModalOpen] = useState(false); // 구매버튼 클릭 시 모달창 열림 여부
   const [isClicked, setIsClicked] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false);
+  const [cartProducts, setCartProducts] = useState([]);
+
+  const closeCartModal = () => {
+    setShowCartModal(false);
+  };
+
   // 쇼핑몰을 통해 상품 클릭시 기존 로컬 스토리지 초기화 방지를 위한 코드  ======= //
   const [cartInLocalStorage, setCartInLocalStorage] = useState(() => {
     // 로컬스토리지에서 데이터 가져오기
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     // 로컬 스토리지에 데이터가 없을때만 초기화
     return storedCart.length > 0 ? storedCart : [];
   });
@@ -24,9 +32,7 @@ const Product = ({ products }) => {
   //============== useParams를 이용해 products에 등록된 Id를 가져오기 ==============//
   //============== (상단 ul - li 부분에 적용 + 썸네일 이미지 가져올 때 필요) ==============//
   const { productId } = useParams();
-  const productIndex = products.findIndex(
-    (p) => p.id === parseInt(productId, 10)
-  );
+  const productIndex = products.findIndex((p) => p.id === parseInt(productId, 10));
 
   const currentProductIdx = products[productIndex];
   //////////////////////////////////////////////////////////////
@@ -40,13 +46,13 @@ const Product = ({ products }) => {
   //============== 데이터 로컬 스토리지 저장 함수 ==============//
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 장바구니 데이터 불러오기
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCartInLocalStorage(storedCart);
   }, []);
 
   useEffect(() => {
     // 장바구니가 업데이트될 때 로컬 스토리지에 저장
-    localStorage.setItem("cart", JSON.stringify(cartInLocalStorage));
+    localStorage.setItem('cart', JSON.stringify(cartInLocalStorage));
   }, [cartInLocalStorage]);
 
   const handleInputChange = (e) => {
@@ -57,11 +63,11 @@ const Product = ({ products }) => {
   //============= 장바구니 추가 기능 ========================//
   const addToCart = () => {
     const productToAdd = products.find((product) => {
-      return product.id === parseInt(productId, 10); //카트 수정부분
+      return product.id === parseInt(productId, 10);
     });
 
     if (!productToAdd) {
-      console.error("Product not found!");
+      console.error('Product not found!');
       return;
     }
 
@@ -70,46 +76,32 @@ const Product = ({ products }) => {
       name: productToAdd.name,
       price: productToAdd.price,
       quantity: prodCount,
-      image: productToAdd.image, // 쇼핑 카트에 이미지 추가
+      image: productToAdd.image,
     };
 
-    //=========== 중복된 아이템 체크 ==================//
-    const existingItemIndex = cartInLocalStorage.findIndex(
-      (item) => item.id === newItem.id
-    );
-
-    // console.log("존재하나?", existingItemIndex); // 중복아이템이 없으면 -1 반환
+    const existingItemIndex = cartInLocalStorage.findIndex((item) => item.id === newItem.id);
 
     if (existingItemIndex !== -1) {
-      // 중복 항목이 있으면 -1를 출력하지 않는다.
-      const userConfirmed = window.confirm(
-        "중복된 아이템이 있습니다. 장바구니를 업데이트 하시겠습니다??"
-      ); // true or false 반환
+      const userConfirmed = window.confirm('중복된 아이템이 있습니다. 장바구니를 업데이트 하시겠습니까?');
 
       if (userConfirmed) {
-        // 유저가 Ok를 선택할시 같은 인덱스 아이템 찾은뒤 quantity만 새로운 값으로 저장한다.
-        const updatedCart = cartInLocalStorage.map((item, index) =>
-          index === existingItemIndex ? { ...item, quantity: prodCount } : item
-        );
+        const updatedCart = cartInLocalStorage.map((item, index) => (index === existingItemIndex ? { ...item, quantity: prodCount } : item));
 
-        // 업데이트된 카트를 저장
         setCartInLocalStorage(updatedCart);
-        // 상태 업데이트
         setCart(updatedCart);
 
-        console.log("Quantity updated");
-        // 사용자가 확인을 거부한 경우 함수 종료
+        console.log('Quantity updated');
+        setShowCartModal(true);
         return;
       } else {
-        // Cancel버튼을 선택한경우.
         return;
       }
     }
 
-    // 중복된 아이템이 없으면 새로운 아이템 추가
-    // 현재 로컬 스토리지의 카트에 새로운 아이템 추가
     setCartInLocalStorage((prevCart) => [...prevCart, newItem]);
     setCart((prevCart) => [...prevCart, newItem]);
+
+    setShowCartModal(true);
   };
   ////////////////////////////////////////////
 
@@ -127,27 +119,27 @@ const Product = ({ products }) => {
   //============== (중간 오른쪽 부분에 적용) ==============//
   const [infoSections, setInfoSections] = useState([
     {
-      title: "제품 정보",
+      title: '제품 정보',
       content:
-        "제품 정보입니다. 제품 크기, 재질, 관리 및 세척 방법 등에 대한 자세한 설명을 추가하세요.\
+        '제품 정보입니다. 제품 크기, 재질, 관리 및 세척 방법 등에 대한 자세한 설명을 추가하세요.\
                 해당 섹션을 이용해 제품의 특별함과 필요성을 서술하면 좋습니다.\
-                상세한 설명을 통해 소비자들에게 확신을 심어줄 수 있으므로 최대한 많은 정보를 포함시켜주세요.",
+                상세한 설명을 통해 소비자들에게 확신을 심어줄 수 있으므로 최대한 많은 정보를 포함시켜주세요.',
       isOpen: true,
     },
     {
-      title: "환불 정책",
+      title: '환불 정책',
       content:
-        "환불 및 교환 정책입니다.\
+        '환불 및 교환 정책입니다.\
                 고객이 구매한 제품에 만족하지 않을 시 필요한 절차에 대한 설명입니다.\
-                명확한 환불 및 교환 정책은 고객에게 제품 구매에 대한 신뢰를 줄 수 있습니다.",
+                명확한 환불 및 교환 정책은 고객에게 제품 구매에 대한 신뢰를 줄 수 있습니다.',
       isOpen: false,
     },
     {
-      title: "배송 정보",
+      title: '배송 정보',
       content:
-        "배송 정보입니다.\
+        '배송 정보입니다.\
                 배송 절차, 제품 포장 및 비용에 대한 설명을 추가하세요.\
-                명확한 배송 정보는 고객에게 제품 구매에 대한 신뢰를 줄 수 있습니다.",
+                명확한 배송 정보는 고객에게 제품 구매에 대한 신뢰를 줄 수 있습니다.',
       isOpen: false,
     },
   ]);
@@ -210,38 +202,18 @@ const Product = ({ products }) => {
               )}
             </li>
           </ul>
-        </div>{" "}
+        </div>{' '}
         {/***** w_prodTop 끝 *****/}
         {/* 제품 이미지, 정보, 수량 입력 및 카트에 추가, 구매하기 버튼 */}
         <div className="w_prodImgText">
           {/* 왼쪽 큰이미지랑 그 밑에 썸네일 이미지 */}
           <div className="w_prodLeft">
-            <img
-              src={
-                selectedImage === currentProductIdx.hoveredImage
-                  ? currentProductIdx.hoveredImage
-                  : currentProductIdx.image
-              }
-              alt={currentProductIdx.name}
-              className="w_prodImg"
-            />
+            <img src={selectedImage === currentProductIdx.hoveredImage ? currentProductIdx.hoveredImage : currentProductIdx.image} alt={currentProductIdx.name} className="w_prodImg" />
             <div className="w_prodSmallImgCont">
-              <img
-                src={currentProductIdx.image}
-                alt={currentProductIdx.name}
-                className="w_prodSmallImg"
-                onClick={() => handleThumbImgClick(currentProductIdx.image)}
-              />
-              <img
-                src={currentProductIdx.hoveredImage}
-                alt={currentProductIdx.name}
-                className="w_prodSmallImg"
-                onClick={() =>
-                  handleThumbImgClick(currentProductIdx.hoveredImage)
-                }
-              />
+              <img src={currentProductIdx.image} alt={currentProductIdx.name} className="w_prodSmallImg" onClick={() => handleThumbImgClick(currentProductIdx.image)} />
+              <img src={currentProductIdx.hoveredImage} alt={currentProductIdx.name} className="w_prodSmallImg" onClick={() => handleThumbImgClick(currentProductIdx.hoveredImage)} />
             </div>
-          </div>{" "}
+          </div>{' '}
           {/***** w_prodLeft (이미지) 끝 *****/}
           {/* 오른쪽 제품명, 가격, 수량 입력 및 정보들 */}
           <div className="w_prodRight">
@@ -251,14 +223,7 @@ const Product = ({ products }) => {
               <p className="w_prodCount">수량</p>
               <div>
                 {/* 수량 입력 input */}
-                <input
-                  className="w_prodCountInput"
-                  type="number"
-                  value={prodCount}
-                  step="1"
-                  min="1"
-                  onChange={handleInputChange}
-                />
+                <input className="w_prodCountInput" type="number" value={prodCount} step="1" min="1" onChange={handleInputChange} />
               </div>
             </div>
             {/* 카트에 추가 버튼과 구매하기 버튼 */}
@@ -266,15 +231,13 @@ const Product = ({ products }) => {
               <button className="w_prodAddBtn" onClick={addToCart}>
                 카트에 추가
               </button>
+              {/* 카트 모달 */}
+              {showCartModal && <CartModal products={cartProducts} onClose={closeCartModal} />}
               <button className="w_prodBuyBtn" onClick={handlePurchaseClick}>
                 구매하기
               </button>
               {/* 모달 */}
-              <Modal
-                isOpen={isPurModalOpen}
-                onRequestClose={handleClosePurModal}
-                className="PurchaseModalCont"
-              >
+              <Modal isOpen={isPurModalOpen} onRequestClose={handleClosePurModal} className="PurchaseModalCont">
                 <div className="PurchaseModal">
                   <h2>온라인 주문 접수 불가</h2>
                   <p>구매를 완료하려면 직접 연락해 주세요.</p>
@@ -286,10 +249,7 @@ const Product = ({ products }) => {
               <div className="w_prodInfosCont">
                 {infoSections.map((infoSection, index) => (
                   <div key={index} className="w_prodInfoCont">
-                    <div
-                      className="w_titleCont"
-                      onClick={() => toggleInfoSection(index)}
-                    >
+                    <div className="w_titleCont" onClick={() => toggleInfoSection(index)}>
                       <p className="w_titleText">{infoSection.title}</p>
                       {infoSection.isOpen ? (
                         <span className="w_titleSymbol">
@@ -301,18 +261,16 @@ const Product = ({ products }) => {
                         </span>
                       )}
                     </div>
-                    {infoSection.isOpen && (
-                      <p className="w_infoText">{infoSection.content}</p>
-                    )}
+                    {infoSection.isOpen && <p className="w_infoText">{infoSection.content}</p>}
                   </div>
                 ))}
-              </div>{" "}
+              </div>{' '}
               {/***** w_prodInfosCont 끝 *****/}
-            </div>{" "}
+            </div>{' '}
             {/***** w_prodBtnInfoCont 끝 *****/}
-          </div>{" "}
+          </div>{' '}
           {/***** w_prodRight 끝 *****/}
-        </div>{" "}
+        </div>{' '}
         {/***** w_prodImgText 끝 *****/}
       </div>
 

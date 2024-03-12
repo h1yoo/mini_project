@@ -20,7 +20,7 @@ export const CartModalBox = styled.div`
   flex-direction: column;
   background-color: white;
   animation: ${slideIn} 0.3s ease-out;
-  z-index: 2;
+  z-index: 2000;
 
   @media (max-width: 2880px) {
     width: 500px;
